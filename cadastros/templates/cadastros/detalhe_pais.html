@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    <h1>Detalhe do País:</h1>
+
+    <p>País: {{ pais.nome }} </p>
+    <div>
+        {% if request.user.is_authenticated %}
+        <a class="btn btn-danger" href="{% url 'pais-remove' pais.id %}">Apagar registro</a>
+        <a class="btn btn-info" href="{% url 'pais-editar' pais.id %}">Atualizar registro</a>
+        {% endif %}
+    </div>
+{% endblock %}

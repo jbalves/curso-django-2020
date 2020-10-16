@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    <h1>Remover Pais:</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>Deseja remover o Pais "{{ pais }}"?</p>
+        <input type="submit" class="btn btn-danger" value="Confirmar">
+    </form>
+
+{% endblock %}

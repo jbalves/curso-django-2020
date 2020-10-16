@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    <h1>Novo País:</h1>
+
+    <form action="{% url 'pais-cadastro' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Salvar" class="btn btn-primary">
+    </form>
+
+{% endblock %}

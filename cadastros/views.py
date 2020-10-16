@@ -7,8 +7,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
 from django.views.generic.base import View
 
-from cadastros.forms import CidadeForm
-from cadastros.models import Cidade
+from cadastros.forms import CidadeForm, PaisForm
+from cadastros.models import Cidade, Pais
 
 
 class SidiaBaseListView(ListView):
@@ -54,6 +54,42 @@ class CidadeUpdate(UpdateView, SuccessMessageMixin):
     form_class = CidadeForm
     template_name = 'cadastros/edita_cidades.html'
     success_url = reverse_lazy('cidades-list')
+    success_message = 'Cadastro atualizado com sucesso!'
+
+
+class PaisCreate(CreateView):
+    model = Pais
+    # fields = ['nome', 'capital']
+    form_class = PaisForm
+    template_name = 'cadastros/cadastra_pais.html'
+    success_url = reverse_lazy('pais-list')
+
+
+class PaisList(SidiaBaseListView):
+
+    queryset = Pais.objects.all().order_by('nome')
+    context_object_name = 'paises'
+    template_name = 'cadastros/lista_pais.html'
+
+
+class PaisDetail(DetailView):
+
+    context_object_name = 'pais'
+    queryset = Pais.objects.all()
+    template_name = 'cadastros/detalhe_pais.html'
+
+
+class PaisDelete(DeleteView):
+    context_object_name = 'pais'
+    model = Pais
+    template_name = 'cadastros/remove_pais.html'
+    success_url = reverse_lazy('pais-list')
+
+class PaisUpdate(UpdateView, SuccessMessageMixin):
+    model = Pais
+    form_class = PaisForm
+    template_name = 'cadastros/edita_pais.html'
+    success_url = reverse_lazy('pais-list')
     success_message = 'Cadastro atualizado com sucesso!'
 
 # class CidadeList(View):

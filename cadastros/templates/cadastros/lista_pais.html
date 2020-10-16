@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    <h1>Países cadastrados:</h1>
+<p>
+    {% if request.user.is_authenticated %}
+<a class="btn btn-primary" href="{% url 'pais-cadastro' %}">Cadastrar novo País</a>
+    {% endif %}
+</p>
+    <ul class="list-group">
+
+        {% for pais in paises %}
+        <a class="list-group-item list-group-item-action {% if pais.nome %} active {% endif %}" href="{% url 'pais-detalhe' pais.id %}" >{{ pais.nome }}</a>
+        {% endfor %}
+
+    </ul>
+{% endblock %}
